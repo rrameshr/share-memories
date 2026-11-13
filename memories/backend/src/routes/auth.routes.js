@@ -22,7 +22,12 @@ const authLimiter = rateLimit({
   message: { message: "Too many attempts. Please try again in a few minutes." }
 });
 
-const baseCookie = () => ({ httpOnly: true, sameSite: "lax", secure: cookieSecure() });
+const baseCookie = () => ({
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+  path: "/",
+});
 const clientUrl = () => clientOrigins()[0];
 
 async function issueSession(req, res, user) {
